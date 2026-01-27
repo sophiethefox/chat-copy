@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "chat-copy",
+	"version": "${version}",
+	"name": "Chat Copy",
+	"description": "Left Alt + Click to copy chat message to clipboard.",
+	"authors": [
+		"sophiethefox"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/sophiethefox/chat-copy"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/chat-copy/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"cc.sophiethefox.chatcopy.ChatCopy"
+		]
+	},
+	"mixins": [
+		"chat-copy.mixins.json"
+	],
+	"depends": {
+		"fabricloader": "*",
+		"minecraft": "*",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
