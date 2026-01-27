@@ -70,7 +70,8 @@ public abstract class ChatScreenMixin {
 
             try {
                 minecraftClient.keyboard.setClipboard(Formatting.strip(message.content().getString()));
-                minecraftClient.player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP);
+                // volume & pitch are used as some version before 1.20.6 does not have a method overload which has defualt values
+                minecraftClient.player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             } catch (Exception e) {
                 // clipboard can be null for some reason ?
             }
