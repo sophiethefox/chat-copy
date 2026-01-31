@@ -1,6 +1,8 @@
 package cc.sophiethefox.chatcopy.mixin;
 
 import cc.sophiethefox.chatcopy.ChatUtil;
+import cc.sophiethefox.chatcopy.config.ModConfig;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 //#if MC>=12109
 import net.minecraft.client.gui.Click;
@@ -19,18 +21,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-
 @Mixin(ChatScreen.class)
+//#if MC>=12109
 public abstract class ChatScreenMixin {
+    //#else
+    //$$ public abstract class ChatScreenMixin extends ScreenMixin {
+    //#endif
+
     // TODO: config for modifier key, ability to log copies to chat, on screen notification for copies
     // DONE: disable click action of clicked message - 1.1.0
 
     // disable click event if holding modifier key
+
+    //#if MC>=12109
     @Inject(method = "handleClickEvent", at = @At(value = "HEAD"), cancellable = true)
     private void onHandleClickEvent(Style style, boolean insert, CallbackInfoReturnable<Boolean> cir) {
+        //#else
+        //$$    @Override
+        //$$    protected void onHandleTextClick(Style style, CallbackInfoReturnable<Boolean> cir) {
+        //#endif
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         long handle = minecraftClient.getWindow().getHandle();
-        if (GLFW.glfwGetKey(handle, GLFW.GLFW_KEY_LEFT_ALT) == 0) {
+        if (GLFW.glfwGetKey(handle, KeyBindingHelper.getBoundKeyOf(ModConfig.copyToClipboardModifier).getCode()) == 0) {
             return;
         }
         cir.setReturnValue(false);
@@ -47,7 +59,7 @@ public abstract class ChatScreenMixin {
             //#endif
             MinecraftClient minecraftClient = MinecraftClient.getInstance();
             long handle = minecraftClient.getWindow().getHandle();
-            if (GLFW.glfwGetKey(handle, GLFW.GLFW_KEY_LEFT_ALT) == 0) {
+            if (GLFW.glfwGetKey(handle, KeyBindingHelper.getBoundKeyOf(ModConfig.copyToClipboardModifier).getCode()) == 0) {
                 return;
             }
 
