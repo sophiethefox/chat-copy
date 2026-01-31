@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(ChatScreen.class)
-//#if MC>=12109
+//#if MC>=12111
 public abstract class ChatScreenMixin {
     //#else
     //$$ public abstract class ChatScreenMixin extends ScreenMixin {
@@ -33,7 +33,7 @@ public abstract class ChatScreenMixin {
 
     // disable click event if holding modifier key
 
-    //#if MC>=12109
+    //#if MC>=12111
     @Inject(method = "handleClickEvent", at = @At(value = "HEAD"), cancellable = true)
     private void onHandleClickEvent(Style style, boolean insert, CallbackInfoReturnable<Boolean> cir) {
         //#else

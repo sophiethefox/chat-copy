@@ -32,6 +32,8 @@ dependencies {
 
     if(platform.mcVersion == 12111) {
         modImplementation("com.terraformersmc:modmenu:17.0.0-beta.2")
+    }else if (platform.mcVersion == 12109){
+        modImplementation("com.terraformersmc:modmenu:16.0.0")
     } else if (platform.mcVersion == 12004){
         modImplementation("com.terraformersmc:modmenu:9.2.0")
     } else if (platform.mcVersion == 12000) {

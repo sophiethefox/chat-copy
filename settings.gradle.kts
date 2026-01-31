@@ -22,6 +22,7 @@ rootProject.buildFileName = "root.gradle.kts"
 listOf(
     "1.20.0-fabric",
     "1.20.4-fabric",
+    "1.21.09-fabric",
     "1.21.11-fabric",
 ).forEach { version ->
     include(":$version")
