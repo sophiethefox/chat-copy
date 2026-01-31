@@ -9,6 +9,7 @@ import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.ChatHudLine;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Style;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,6 +22,21 @@ import java.util.List;
 
 @Mixin(ChatScreen.class)
 public abstract class ChatScreenMixin {
+    // TODO: config for modifier key, ability to log copies to chat, on screen notification for copies
+    // DONE: disable click action of clicked message - 1.1.0
+
+    // disable click event if holding modifier key
+    @Inject(method = "handleClickEvent", at = @At(value = "HEAD"), cancellable = true)
+    private void onHandleClickEvent(Style style, boolean insert, CallbackInfoReturnable<Boolean> cir) {
+        MinecraftClient minecraftClient = MinecraftClient.getInstance();
+        long handle = minecraftClient.getWindow().getHandle();
+        if (GLFW.glfwGetKey(handle, GLFW.GLFW_KEY_LEFT_ALT) == 0) {
+            return;
+        }
+        cir.setReturnValue(false);
+        cir.cancel();
+    }
+
     @Inject(method = "mouseClicked", at = @At(value = "HEAD"))
     //#if MC>=12109
     private void onChatMessageClicked(Click click, boolean doubled, CallbackInfoReturnable<Boolean> cir) {
