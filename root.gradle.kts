@@ -8,6 +8,8 @@ preprocess {
     // handleClickEvent in ChatScreen.class introduced
     val fabric12111 = createNode("1.21.11-fabric", 12111, "yarn")
 
+    val fabric261 = createNode("26.1-fabric", 26_00_00, "yarn")
+
     // 1.21.09 - 1.21.10
     // mouseClicked in ChatScreen.class method signature changed
     val fabric12109 = createNode("1.21.09-fabric", 12109, "yarn")
@@ -19,7 +21,9 @@ preprocess {
     // 1.20.0 - 1.20.3
     val fabric12000 = createNode("1.20.0-fabric", 12000, "yarn")
 
+    fabric12111.link(fabric261)
     fabric12111.link(fabric12109)
+
     fabric12109.link(fabric12004)
     fabric12004.link(fabric12000)
 

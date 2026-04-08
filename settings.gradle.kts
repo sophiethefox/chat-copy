@@ -11,7 +11,7 @@ pluginManagement {
         maven("https://maven.minecraftforge.net")
     }
     plugins {
-        val egtVersion = "0.7.0-alpha.2"
+        val egtVersion = "0.7.0-alpha.4"
         id("gg.essential.multi-version.root") version egtVersion
         id("gg.essential.multi-version.api-validation") version egtVersion
     }
@@ -24,6 +24,7 @@ listOf(
     "1.20.4-fabric",
     "1.21.09-fabric",
     "1.21.11-fabric",
+    "26.1-fabric",
 ).forEach { version ->
     include(":$version")
     project(":$version").apply {
