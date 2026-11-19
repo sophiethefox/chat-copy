@@ -30,7 +30,11 @@ dependencies {
 
     modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricApiVersion")
 
-    if (platform.mcVersion > 12111) {
+    if (platform.mcVersion >= 26_02_00) {
+        implementation("com.terraformersmc:modmenu:20.0.3") {
+            exclude("eu.pb4")
+        }
+    } else if (platform.mcVersion > 12111) {
         implementation("com.terraformersmc:modmenu:18.0.0-alpha.8") {
             exclude("eu.pb4")
         }
